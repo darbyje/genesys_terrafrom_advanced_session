@@ -42,6 +42,9 @@ jobs:
     - name: Switch Backend Configuration
       run: |
         echo "Switching to dev backend configuration..."
+        # Remove existing backend.tf to avoid conflicts
+        rm -f backend.tf
+        # Copy dev backend configuration
         cp backend-dev.tf backend.tf
         echo "✅ Backend configuration switched to dev environment"
         echo "State file: dev/org/genesyspsapac/terraform.tfstate"

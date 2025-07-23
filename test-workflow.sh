@@ -31,6 +31,13 @@ for file in "${workflow_files[@]}"; do
         else
             echo "✅ $file has been updated correctly"
         fi
+        
+        # Check for the rm -f backend.tf command
+        if grep -q "rm -f backend.tf" "$file"; then
+            echo "✅ $file includes backend conflict fix"
+        else
+            echo "❌ $file missing backend conflict fix"
+        fi
     else
         echo "❌ $file missing"
     fi
@@ -42,6 +49,7 @@ echo "🔧 Checking backend configuration files..."
 backend_files=(
     "backend-dev.tf"
     "backend-prod.tf"
+    "backend-original.tf"
 )
 
 for file in "${backend_files[@]}"; do
@@ -52,6 +60,13 @@ for file in "${backend_files[@]}"; do
     fi
 done
 
+# Check that the original backend.tf is gone
+if [ -f "backend.tf" ]; then
+    echo "❌ backend.tf still exists (should be removed)"
+else
+    echo "✅ backend.tf removed (conflict resolved)"
+fi
+
 echo ""
 echo "🎯 Current branch: $(git rev-parse --abbrev-ref HEAD)"
 
@@ -59,6 +74,6 @@ echo ""
 echo "📋 Next steps to test:"
 echo "1. Commit these workflow changes"
 echo "2. Push to dev branch to test the workflow"
-echo "3. Check GitHub Actions to see if the error is resolved"
+echo "3. Check GitHub Actions to see if the backend conflict is resolved"
 echo ""
-echo "✅ The 'Switch Backend Configuration' error should now be fixed!" 
+echo "✅ The 'Duplicate backend configuration' error should now be fixed!" 

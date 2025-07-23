@@ -40,6 +40,9 @@ jobs:
     - name: Switch Backend Configuration
       run: |
         echo "Switching to prod backend configuration..."
+        # Remove existing backend.tf to avoid conflicts
+        rm -f backend.tf
+        # Copy prod backend configuration
         cp backend-prod.tf backend.tf
         echo "✅ Backend configuration switched to prod environment"
         echo "State file: prod/org/genesyspsapac/terraform.tfstate"
@@ -126,6 +129,9 @@ jobs:
     - name: Switch Backend Configuration
       run: |
         echo "Switching to prod backend configuration..."
+        # Remove existing backend.tf to avoid conflicts
+        rm -f backend.tf
+        # Copy prod backend configuration
         cp backend-prod.tf backend.tf
         echo "✅ Backend configuration switched to prod environment"
         echo "State file: prod/org/genesyspsapac/terraform.tfstate"

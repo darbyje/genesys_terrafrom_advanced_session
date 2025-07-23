@@ -7,4 +7,4 @@ terraform {
     encrypt      = true
     use_lockfile = true #look in to this                 
   }
-}
+} 
