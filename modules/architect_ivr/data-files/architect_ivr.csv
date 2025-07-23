@@ -1,0 +1,3 @@
+name,description,division,dnis,open_hours_flow,closed_hours_flow,holiday_hours_flow,schedule_group
+Terraform_CR,,Home,"+64198000",Terraform Flow A,Terraform Flow A,,Terraform_SG
+Terraform_CR_2,,Terraform Division,"+64198001",Terraform Flow B,,,

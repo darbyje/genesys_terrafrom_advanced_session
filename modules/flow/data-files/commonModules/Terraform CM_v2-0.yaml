@@ -1,0 +1,100 @@
+commonModule:
+  name: Terraform CM
+  description: ""
+  division: Home
+  supportedLanguages:
+    en-au:
+      none: true
+  variables:
+    - stringVariable:
+        name: Common.Input
+        initialValue:
+          noValue: true
+        isInput: true
+        isOutput: false
+    - stringVariable:
+        name: Common.Output
+        initialValue:
+          noValue: true
+        isInput: false
+        isOutput: true
+    - stringVariable:
+        name: Common.Output2
+        initialValue:
+          noValue: true
+        isInput: false
+        isOutput: true
+  settingsCommonModule:
+    compatibleFlowTypes:
+      - flowType: inboundcall
+  settingsActionDefaults:
+    playAudioOnSilence:
+      timeout:
+        lit:
+          seconds: 40
+    detectSilence:
+      timeout:
+        lit:
+          seconds: 40
+    callData:
+      processingPrompt:
+        noValue: true
+    callDataSecure:
+      processingPrompt:
+        noValue: true
+    collectInput:
+      noEntryTimeout:
+        lit:
+          seconds: 5
+    dialByExtension:
+      interDigitTimeout:
+        lit:
+          seconds: 6
+    transferToUser:
+      connectTimeout:
+        noValue: true
+    transferToNumber:
+      connectTimeout:
+        noValue: true
+    transferToGroup:
+      connectTimeout:
+        noValue: true
+    transferToFlowSecure:
+      connectTimeout:
+        lit:
+          seconds: 15
+  settingsPrompts:
+    ensureAudioInPrompts: false
+    promptMediaToValidate:
+      - mediaType: audio
+      - mediaType: tts
+  startUpTaskActions:
+    - decision:
+        name: Decision
+        condition:
+          exp: Common.Input == "xx"
+        outputs:
+          "yes":
+            actions:
+              - updateData:
+                  name: Update Data
+                  statements:
+                    - string:
+                        variable: Common.Output
+                        value:
+                          lit: xx
+          "no":
+            actions:
+              - updateData:
+                  name: Update Data
+                  statements:
+                    - string:
+                        variable: Common.Output
+                        value:
+                          lit: yy
+    - playAudio:
+        name: Play Audio
+        audio:
+          tts: Do Something
+    - endTask:
+        name: Exit Common Module

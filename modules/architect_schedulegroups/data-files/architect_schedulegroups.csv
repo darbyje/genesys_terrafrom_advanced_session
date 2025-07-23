@@ -1,0 +1,3 @@
+name,description,division,time_zone,open_schedules,closed_schedules,holiday_schedules
+Terraform_SG,,Home,Pacific/Auckland,BH_M-F_0700-1700,,"PH_New Years Day, PH_Day after New Years Day, PH_Waitangi Day, PH_Good Friday, PH_Easter Monday, PH_Anzac Day, PH_Kings Official Birthday, PH_Matariki, PH_Labor Day, PH_Christmas, PH_Boxing Day"
+Terraform_SG_2,,Terraform Division,Pacific/Auckland,BH_M-F_0700-1700,,

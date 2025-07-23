@@ -1,0 +1,3 @@
+name,roles_division
+TF Group A,AI Agent[Home]|admin[*]
+TF Group B,admin[Home;Terraform Division]

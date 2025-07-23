@@ -1,0 +1,2 @@
+name,description,division,skill_conditions
+Terraform_SkillGroup,,"Terraform Division,Home","[ { ""routingSkillConditions"": [ { ""routingSkill"": ""Terraform Skill A"", ""comparator"": ""GreaterThan"", ""proficiency"": 0, ""childConditions"": [] } ],""languageSkillConditions"": [], ""operation"": ""Or"" } ]"

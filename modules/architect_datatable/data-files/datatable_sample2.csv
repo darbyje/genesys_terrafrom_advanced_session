@@ -1,0 +1,5 @@
+name,type,title,default
+key,string,Email,
+identifier,integer,Customer Identifier,
+name,string,Customer Name,
+deleted,boolean,Is Deleted,false

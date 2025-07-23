@@ -1,0 +1,141 @@
+name: 'Terraform Prod Environment'
+
+on:
+  push:
+    branches: [ prod ]
+
+env:
+  TF_VERSION: '1.6.0'
+  TF_WORKING_DIR: '.'
+  AWS_REGION: 'ap-southeast-2'
+
+jobs:
+  terraform-plan:
+    name: 'Terraform Plan'
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+
+    - name: Setup AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Terraform Format Check
+      run: terraform fmt -check -recursive
+
+    - name: Switch Backend Configuration
+      uses: ./.github/workflows/switch-backend.yml
+      with:
+        environment: prod
+
+    - name: Terraform Init
+      run: terraform init
+      env:
+        TF_VAR_oauthclient_id: ${{ secrets.PROD_OAUTHCLIENT_ID }}
+        TF_VAR_oauthclient_secret: ${{ secrets.PROD_OAUTHCLIENT_SECRET }}
+        TF_VAR_aws_region: ${{ env.AWS_REGION }}
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color -out=tfplan
+      env:
+        TF_VAR_oauthclient_id: ${{ secrets.PROD_OAUTHCLIENT_ID }}
+        TF_VAR_oauthclient_secret: ${{ secrets.PROD_OAUTHCLIENT_SECRET }}
+        TF_VAR_aws_region: ${{ env.AWS_REGION }}
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: 'Terraform Plan for Production'
+        title: '🚀 Production Deployment - Terraform Changes'
+        body: |
+          ## Production Terraform Deployment
+          
+          This PR contains Terraform changes for the production environment.
+          
+          ### Changes Summary
+          ```hcl
+          ${{ steps.plan.outputs.stdout }}
+          ```
+          
+          ### Required Approvals
+          - [ ] Infrastructure Team Approval
+          - [ ] Security Review
+          - [ ] Change Management Approval
+          
+          ### Deployment Instructions
+          1. Review the Terraform plan above
+          2. Ensure all changes are expected and approved
+          3. Merge this PR to deploy to production
+          
+          **⚠️ Warning: This will deploy changes to the production environment**
+        branch: prod-deployment
+        base: prod
+        delete-branch: true
+        labels: |
+          production
+          terraform
+          deployment
+        assignees: ${{ github.actor }}
+
+  terraform-apply:
+    name: 'Terraform Apply'
+    runs-on: ubuntu-latest
+    needs: terraform-plan
+    
+    defaults:
+      run:
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+
+    - name: Setup AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Switch Backend Configuration
+      uses: ./.github/workflows/switch-backend.yml
+      with:
+        environment: prod
+
+    - name: Terraform Init
+      run: terraform init
+      env:
+        TF_VAR_oauthclient_id: ${{ secrets.PROD_OAUTHCLIENT_ID }}
+        TF_VAR_oauthclient_secret: ${{ secrets.PROD_OAUTHCLIENT_SECRET }}
+        TF_VAR_aws_region: ${{ env.AWS_REGION }}
+
+    - name: Terraform Apply
+      run: terraform apply tfplan
+      env:
+        TF_VAR_oauthclient_id: ${{ secrets.PROD_OAUTHCLIENT_ID }}
+        TF_VAR_oauthclient_secret: ${{ secrets.PROD_OAUTHCLIENT_SECRET }}
+        TF_VAR_aws_region: ${{ env.AWS_REGION }} 

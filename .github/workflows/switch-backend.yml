@@ -1,0 +1,34 @@
+name: 'Switch Backend Configuration'
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+        description: 'Environment to deploy (dev or prod)'
+
+jobs:
+  switch-backend:
+    name: 'Switch Backend'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Switch Backend Configuration
+      run: |
+        if [ "${{ inputs.environment }}" = "dev" ]; then
+          echo "Switching to dev backend configuration..."
+          cp backend-dev.tf backend.tf
+        elif [ "${{ inputs.environment }}" = "prod" ]; then
+          echo "Switching to prod backend configuration..."
+          cp backend-prod.tf backend.tf
+        else
+          echo "❌ Error: Invalid environment specified. Use 'dev' or 'prod'"
+          exit 1
+        fi
+        
+        echo "✅ Backend configuration switched to ${{ inputs.environment }} environment"
+        echo "State file: ${{ inputs.environment }}/org/genesyspsapac/terraform.tfstate" 

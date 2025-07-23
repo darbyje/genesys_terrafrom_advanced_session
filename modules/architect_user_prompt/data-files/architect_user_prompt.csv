@@ -1,0 +1,4 @@
+name,description,language,text,tts_string,filename
+TerraformPromptA,,en-au,"Hello, Welcome to Terraform","Hello, Welcome to Terraform",5.wav
+TerraformPromptB,,en-au,"Hello, Welcome to Terraform","Hello, Welcome to Terraform",
+TerraformPromptC,,en-au,,,5.wav

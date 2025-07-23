@@ -1,0 +1,92 @@
+name: 'Terraform Dev Environment'
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+env:
+  TF_VERSION: '1.6.0'
+  TF_WORKING_DIR: '.'
+  AWS_REGION: 'ap-southeast-2'
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+
+    - name: Setup AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Terraform Format Check
+      run: terraform fmt -check -recursive
+
+    - name: Switch Backend Configuration
+      uses: ./.github/workflows/switch-backend.yml
+      with:
+        environment: dev
+
+    - name: Terraform Init
+      run: terraform init
+      env:
+        TF_VAR_oauthclient_id: ${{ secrets.DEV_OAUTHCLIENT_ID }}
+        TF_VAR_oauthclient_secret: ${{ secrets.DEV_OAUTHCLIENT_SECRET }}
+        TF_VAR_aws_region: ${{ env.AWS_REGION }}
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color
+      env:
+        TF_VAR_oauthclient_id: ${{ secrets.DEV_OAUTHCLIENT_ID }}
+        TF_VAR_oauthclient_secret: ${{ secrets.DEV_OAUTHCLIENT_SECRET }}
+        TF_VAR_aws_region: ${{ env.AWS_REGION }}
+      continue-on-error: true
+
+    - name: Update Pull Request
+      uses: actions/github-script@v7
+      if: github.event_name == 'pull_request'
+      env:
+        PLAN: "${{ steps.plan.outputs.stdout }}"
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const output = `#### Terraform Plan 📋
+          \`\`\`\n
+          ${process.env.PLAN || 'No changes. Infrastructure is up-to-date.'}
+          \`\`\`
+          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+          })
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+      run: terraform apply -auto-approve
+      env:
+        TF_VAR_oauthclient_id: ${{ secrets.DEV_OAUTHCLIENT_ID }}
+        TF_VAR_oauthclient_secret: ${{ secrets.DEV_OAUTHCLIENT_SECRET }}
+        TF_VAR_aws_region: ${{ env.AWS_REGION }} 

@@ -1,0 +1,142 @@
+inboundCall:
+  name: {{flow_name}}
+  description: ""
+  division: {{division}}
+  startUpRef: "/inboundCall/tasks/task[New Task 1_12]"
+  defaultLanguage: en-au
+  supportedLanguages:
+    en-au:
+      defaultLanguageSkill:
+        noValue: true
+  initialGreeting:
+    tts: Hello, this is the initial greeting.
+  settingsActionDefaults:
+    playAudioOnSilence:
+      timeout:
+        lit:
+          seconds: 40
+    detectSilence:
+      timeout:
+        lit:
+          seconds: 40
+    callData:
+      processingPrompt:
+        lit:
+          name: PromptSystem.processing
+    collectInput:
+      noEntryTimeout:
+        lit:
+          seconds: 5
+    dialByExtension:
+      interDigitTimeout:
+        lit:
+          seconds: 6
+    transferToUser:
+      connectTimeout:
+        noValue: true
+    transferToNumber:
+      connectTimeout:
+        noValue: true
+    transferToGroup:
+      connectTimeout:
+        noValue: true
+    transferToFlowSecure:
+      connectTimeout:
+        lit:
+          seconds: 15
+  settingsErrorHandling:
+    errorHandling:
+      disconnect:
+        none: true
+    preHandlingAudio:
+      tts: Sorry, an error occurred. Please try your call again.
+  settingsMenu:
+    extensionDialingMaxDelay:
+      lit:
+        seconds: 1
+    listenForExtensionDialing:
+      lit: true
+    menuSelectionTimeout:
+      lit:
+        seconds: 10
+    repeatCount:
+      lit: 3
+  settingsPrompts:
+    ensureAudioInPrompts: false
+    promptMediaToValidate:
+      - mediaType: audio
+      - mediaType: tts
+  settingsSpeechRec:
+    completeMatchTimeout:
+      lit:
+        ms: 100
+    incompleteMatchTimeout:
+      lit:
+        ms: 1500
+    maxSpeechLengthTimeout:
+      lit:
+        seconds: 20
+    minConfidenceLevel:
+      lit: 50
+    asrCompanyDir: none
+    asrEnabledOnFlow: true
+    suppressRecording: true
+  tasks:
+    - task:
+        name: New Task 1
+        refId: New Task 1_12
+        variables:
+          - stringVariable:
+              name: Task.Output
+              initialValue:
+                noValue: true
+              isInput: false
+              isOutput: false
+        actions:
+          - playAudio:
+              name: Play Audio
+              audio:
+                tts: Play Something
+          - callCommonModule:
+              name: Call Common Module
+              commonModule:
+                Terraform CM:
+                  ver_latestPublished:
+                    inputs:
+                      Common.Input:
+                        lit: z
+                    outputs:
+                      Common.Output:
+                        var: Task.Output
+          - setParticipantData:
+              name: Set Participant Data
+              attributes:
+                - attribute:
+                    name:
+                      lit: Output
+                    value:
+                      exp: Task.Output
+          - transferToAcd:
+              name: Transfer to ACD
+              targetQueue:
+                lit:
+                  name: Terraform Queue A
+              preTransferAudio:
+                exp: AudioPlaybackOptions(ToAudio(NOT_SET), true)
+              failureTransferAudio:
+                exp: AudioPlaybackOptions(ToAudio(NOT_SET), true)
+              priority:
+                lit: 0
+              preferredAgents:
+                noValue: true
+              languageSkill:
+                noValue: true
+              directAgent:
+                noValue: true
+              failureOutputs:
+                errorType:
+                  noValue: true
+                errorMessage:
+                  noValue: true
+          - disconnect:
+              name: Disconnect

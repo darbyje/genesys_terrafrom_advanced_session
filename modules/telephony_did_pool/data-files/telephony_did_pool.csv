@@ -1,0 +1,2 @@
+start_phone_number,end_phone_number,service_provider,comments,pool_provider
++64198000,+64199000,Internal,Terraform Range,
