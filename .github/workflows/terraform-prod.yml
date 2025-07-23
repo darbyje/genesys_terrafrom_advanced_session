@@ -38,9 +38,11 @@ jobs:
       run: terraform fmt -check -recursive
 
     - name: Switch Backend Configuration
-      uses: ./.github/workflows/switch-backend.yml
-      with:
-        environment: prod
+      run: |
+        echo "Switching to prod backend configuration..."
+        cp backend-prod.tf backend.tf
+        echo "✅ Backend configuration switched to prod environment"
+        echo "State file: prod/org/genesyspsapac/terraform.tfstate"
 
     - name: Terraform Init
       run: terraform init
@@ -122,9 +124,11 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Switch Backend Configuration
-      uses: ./.github/workflows/switch-backend.yml
-      with:
-        environment: prod
+      run: |
+        echo "Switching to prod backend configuration..."
+        cp backend-prod.tf backend.tf
+        echo "✅ Backend configuration switched to prod environment"
+        echo "State file: prod/org/genesyspsapac/terraform.tfstate"
 
     - name: Terraform Init
       run: terraform init

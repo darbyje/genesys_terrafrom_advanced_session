@@ -40,9 +40,11 @@ jobs:
       run: terraform fmt -check -recursive
 
     - name: Switch Backend Configuration
-      uses: ./.github/workflows/switch-backend.yml
-      with:
-        environment: dev
+      run: |
+        echo "Switching to dev backend configuration..."
+        cp backend-dev.tf backend.tf
+        echo "✅ Backend configuration switched to dev environment"
+        echo "State file: dev/org/genesyspsapac/terraform.tfstate"
 
     - name: Terraform Init
       run: terraform init
