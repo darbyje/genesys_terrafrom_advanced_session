@@ -8,7 +8,7 @@ locals {
 
 
 resource "genesyscloud_flow_milestone" "all_milestones" {
-  for_each = { for q in local.milestones : q.name => q }
-  name     = each.value.name
+  for_each    = { for q in local.milestones : q.name => q }
+  name        = each.value.name
   description = each.value.description
 }

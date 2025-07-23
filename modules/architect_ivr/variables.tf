@@ -6,6 +6,6 @@
 
 variable "schedule_groups_id_map" {
 
-    type = map(string)
-  
+  type = map(string)
+
 }

@@ -1,13 +1,13 @@
 locals {
   csv_data = file("${path.module}/data-files/group_roles.csv")
-  groups = csvdecode(local.csv_data)
+  groups   = csvdecode(local.csv_data)
 }
 
 locals {
   # Parse roles and divisions from the CSV
-  parsed_roles = [ for group in local.groups: {
+  parsed_roles = [for group in local.groups : {
     group_name = group.name
-    group_id = lookup(var.groups_id_map, group.name, "")
+    group_id   = lookup(var.groups_id_map, group.name, "")
     roles = [
       for role_entry in split("|", group.roles_division) : {
         role_name = regex("^([^\\[]+)", trimspace(role_entry))[0]
@@ -35,12 +35,12 @@ locals {
 
 data "genesyscloud_auth_role" "all_roles" {
   for_each = toset(local.unique_roles)
-  name = each.key
+  name     = each.key
 }
 
 data "genesyscloud_auth_division" "divisions" {
   for_each = toset(local.unique_divisions)
-  name = each.key
+  name     = each.key
 }
 
 resource "genesyscloud_group_roles" "all_group_roles" {

@@ -6,6 +6,6 @@
 
 variable "ivrs_id_map" {
 
-    type = map(string)
-  
+  type = map(string)
+
 }

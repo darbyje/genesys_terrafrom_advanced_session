@@ -4,5 +4,5 @@
 ###
 
 output "groups" {
-    value = { for k, group in genesyscloud_group.all_groups: k => group.id}
+  value = { for k, group in genesyscloud_group.all_groups : k => group.id }
 }

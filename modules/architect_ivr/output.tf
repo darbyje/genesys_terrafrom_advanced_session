@@ -4,5 +4,5 @@
 ###
 
 output "ivrs" {
-    value = { for k, ivr in genesyscloud_architect_ivr.all_ivr: k => ivr.id}
+  value = { for k, ivr in genesyscloud_architect_ivr.all_ivr : k => ivr.id }
 }

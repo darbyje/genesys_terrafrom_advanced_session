@@ -9,5 +9,5 @@ locals {
 resource "genesyscloud_routing_skill" "all_skills" {
   for_each = { for q in local.skills : q.name => q }
 
-  name              = each.value.name
+  name = each.value.name
 }

@@ -4,5 +4,5 @@
 ###
 
 output "schedules" {
-    value = { for k, schedule in genesyscloud_architect_schedules.all_schedules: k => schedule.id }
+  value = { for k, schedule in genesyscloud_architect_schedules.all_schedules : k => schedule.id }
 }

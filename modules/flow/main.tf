@@ -5,7 +5,7 @@ locals {
     "Terraform Flow C" = "Terraform Division B"
   }
   common_module_hash = filesha256("${path.module}/data-files/commonModules/Terraform CM_v1-0.yaml")
-  inbound_flow_hash = filesha256("${path.module}/data-files/inboundCall/Terraform Inbound Flow_v1-0.yaml")
+  inbound_flow_hash  = filesha256("${path.module}/data-files/inboundCall/Terraform Inbound Flow_v1-0.yaml")
 }
 
 resource "genesyscloud_flow" "iterable_flows" {
@@ -16,11 +16,11 @@ resource "genesyscloud_flow" "iterable_flows" {
     local.common_module_hash
   ])
 
-  depends_on = [ genesyscloud_flow.common_modules ]
+  depends_on = [genesyscloud_flow.common_modules]
 
   substitutions = {
     flow_name = each.key
-    division = each.value
+    division  = each.value
   }
 }
 

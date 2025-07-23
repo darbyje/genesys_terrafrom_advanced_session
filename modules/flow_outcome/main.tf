@@ -8,7 +8,7 @@ locals {
 
 
 resource "genesyscloud_flow_outcome" "outcomes" {
-  for_each = { for q in local.outcomes : q.name => q }
-  name     = each.value.name
+  for_each    = { for q in local.outcomes : q.name => q }
+  name        = each.value.name
   description = each.value.description
 }

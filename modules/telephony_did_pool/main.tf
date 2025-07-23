@@ -10,9 +10,9 @@ resource "genesyscloud_telephony_providers_edges_did_pool" "all_did_pool" {
   for_each = { for q in local.did_pools : q.start_phone_number => q }
 
   start_phone_number = each.value.start_phone_number
-  end_phone_number = each.value.end_phone_number
-  description = each.value.service_provider
-  comments = each.value.comments
-  pool_provider = length(trimspace(each.value.pool_provider)) < 1 ? "PURE_CLOUD" : each.value.pool_provider
+  end_phone_number   = each.value.end_phone_number
+  description        = each.value.service_provider
+  comments           = each.value.comments
+  pool_provider      = length(trimspace(each.value.pool_provider)) < 1 ? "PURE_CLOUD" : each.value.pool_provider
 
 }

@@ -12,7 +12,7 @@ variable "division" {
 variable "description" {
   description = "The description for the datatable"
   type        = string
-  default = ""
+  default     = ""
 }
 
 variable "csv_files" {

@@ -10,7 +10,7 @@ resource "genesyscloud_telephony_providers_edges_extension_pool" "all_extension_
   for_each = { for q in local.extension_pools : q.start_number => q }
 
   start_number = each.value.start_number
-  end_number = each.value.end_number
-  description = each.value.description
+  end_number   = each.value.end_number
+  description  = each.value.description
 
 }

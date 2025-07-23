@@ -2,11 +2,11 @@
 locals {
   # Create a map of datatable configurations from the provided CSV files
   datatable_configs = {
-    for file in var.csv_files : 
+    for file in var.csv_files :
     replace(basename(file), ".csv", "") => {
-      name = replace(basename(file), ".csv", "")
-      csvfile = "${path.module}/data-files/${file}"
-      division = var.division
+      name        = replace(basename(file), ".csv", "")
+      csvfile     = "${path.module}/data-files/${file}"
+      division    = var.division
       description = var.description
     }
   }
