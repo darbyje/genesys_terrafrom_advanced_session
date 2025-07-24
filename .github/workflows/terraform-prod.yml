@@ -117,10 +117,10 @@ jobs:
         minimum-approvals: 1
         issue-title: "Approve Production Deployment"
         issue-body: "Please review and approve the production deployment"
-        exclude-workflow-initiator-as-approver: true
+        exclude-workflow-initiator-as-approver: false
 
     - name: Terraform Apply
-      if: github.event.pull_request.merged == true
+      if: github.event.pull_request.merged == true || github.event_name == 'push'
       run: terraform apply tfplan
       env:
         TF_VAR_oauthclient_id: ${{ secrets.PROD_OAUTHCLIENT_ID }}
