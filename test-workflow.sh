@@ -38,6 +38,13 @@ for file in "${workflow_files[@]}"; do
         else
             echo "❌ $file missing backend conflict fix"
         fi
+        
+        # Check for the rm -f backend-original.tf command
+        if grep -q "rm -f backend-original.tf" "$file"; then
+            echo "✅ $file includes backend-original cleanup"
+        else
+            echo "❌ $file missing backend-original cleanup"
+        fi
     else
         echo "❌ $file missing"
     fi
@@ -49,7 +56,7 @@ echo "🔧 Checking backend configuration files..."
 backend_files=(
     "backend-dev.tf"
     "backend-prod.tf"
-    "backend-original.tf"
+    "backend-original.tf.backup"
 )
 
 for file in "${backend_files[@]}"; do
@@ -60,11 +67,17 @@ for file in "${backend_files[@]}"; do
     fi
 done
 
-# Check that the original backend.tf is gone
+# Check that problematic files are gone
 if [ -f "backend.tf" ]; then
     echo "❌ backend.tf still exists (should be removed)"
 else
     echo "✅ backend.tf removed (conflict resolved)"
+fi
+
+if [ -f "backend-original.tf" ]; then
+    echo "❌ backend-original.tf still exists (should be renamed)"
+else
+    echo "✅ backend-original.tf renamed to .backup (conflict resolved)"
 fi
 
 echo ""

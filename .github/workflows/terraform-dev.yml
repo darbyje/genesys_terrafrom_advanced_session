@@ -43,8 +43,9 @@ jobs:
     - name: Switch Backend Configuration
       run: |
         echo "Switching to dev backend configuration..."
-        # Remove existing backend.tf to avoid conflicts
+        # Remove any existing backend.tf files to avoid conflicts
         rm -f backend.tf
+        rm -f backend-original.tf
         # Copy dev backend configuration
         cp backend-dev.tf backend.tf
         echo "✅ Backend configuration switched to dev environment"

@@ -41,8 +41,9 @@ jobs:
     - name: Switch Backend Configuration
       run: |
         echo "Switching to prod backend configuration..."
-        # Remove existing backend.tf to avoid conflicts
+        # Remove any existing backend.tf files to avoid conflicts
         rm -f backend.tf
+        rm -f backend-original.tf
         # Copy prod backend configuration
         cp backend-prod.tf backend.tf
         echo "✅ Backend configuration switched to prod environment"
@@ -130,8 +131,9 @@ jobs:
     - name: Switch Backend Configuration
       run: |
         echo "Switching to prod backend configuration..."
-        # Remove existing backend.tf to avoid conflicts
+        # Remove any existing backend.tf files to avoid conflicts
         rm -f backend.tf
+        rm -f backend-original.tf
         # Copy prod backend configuration
         cp backend-prod.tf backend.tf
         echo "✅ Backend configuration switched to prod environment"
