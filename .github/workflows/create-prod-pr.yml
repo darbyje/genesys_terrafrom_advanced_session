@@ -3,7 +3,7 @@ name: "Create PR from dev to prod"
 on:
   push:
     branches:
-      - prod
+      - dev
 
 jobs:
   create-pr:
@@ -19,10 +19,11 @@ jobs:
 
       - name: Create PR from dev to prod if not exists
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           if gh pr list --base prod --head dev --state open | grep -q .; then
             echo "PR from dev to prod already exists."
           else
-            gh pr create --base prod --head dev --title "Promote dev to prod" --body "Automated PR to promote dev to prod"
+            gh pr create --base prod --head dev --title "Promote dev to prod" --body "Automated PR to promote dev to prod" || \
+            echo "No commits to promote from dev to prod. Skipping PR creation."
           fi 
