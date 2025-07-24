@@ -16,6 +16,20 @@ else
     echo "❌ variables.tf missing correct default region"
 fi
 
+# Check main.tf provider configuration
+if grep -q 'aws_region.*=.*"ap-southeast-2"' main.tf; then
+    echo "✅ main.tf provider has hardcoded correct region"
+else
+    echo "❌ main.tf provider missing hardcoded region"
+fi
+
+# Check cfg.auto.tfvars (the problematic file)
+if grep -q 'aws_region.*=.*"ap-southeast-2"' cfg.auto.tfvars; then
+    echo "✅ cfg.auto.tfvars has correct region (fixed!)"
+else
+    echo "❌ cfg.auto.tfvars still has incorrect region"
+fi
+
 # Check dev.tfvars
 if grep -q 'aws_region.*=.*"ap-southeast-2"' dev.tfvars; then
     echo "✅ dev.tfvars has correct region"
@@ -52,7 +66,13 @@ echo "📋 Region Configuration Summary:"
 echo "   - AWS Region: ap-southeast-2"
 echo "   - Genesys Cloud Region: ap-southeast-2"
 echo "   - S3 Backend Region: ap-southeast-2"
+echo "   - Provider Region: Hardcoded in main.tf"
 echo ""
 echo "✅ Region configuration should now work correctly!"
 echo ""
-echo "🎯 The 'expected aws_region to be one of' error should be resolved!" 
+echo "🎯 The 'expected aws_region to be one of' error should be resolved!"
+echo ""
+echo "🔧 Key fixes applied:"
+echo "   - Fixed cfg.auto.tfvars (was setting 'region' literal)"
+echo "   - Hardcoded region in provider configuration"
+echo "   - Ensured all .tfvars files have correct region" 
