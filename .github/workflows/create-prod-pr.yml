@@ -1,0 +1,28 @@
+name: "Create PR from dev to prod"
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh
+
+      - name: Create PR from dev to prod if not exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh pr list --base prod --head dev --state open | grep -q .; then
+            echo "PR from dev to prod already exists."
+          else
+            gh pr create --base prod --head dev --title "Promote dev to prod" --body "Automated PR to promote dev to prod"
+          fi 

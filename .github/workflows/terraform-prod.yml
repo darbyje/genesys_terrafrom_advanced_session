@@ -1,8 +1,6 @@
 name: 'Terraform Prod Environment (Simple)'
 
 on:
-  push:
-    branches: [ prod ]
   pull_request:
     types: [closed]
     branches: [ prod ]
@@ -23,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     
     # Only run this workflow when PR is merged (not when closed without merging)
-    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    if: github.event.pull_request.merged == true
     
     defaults:
       run:
