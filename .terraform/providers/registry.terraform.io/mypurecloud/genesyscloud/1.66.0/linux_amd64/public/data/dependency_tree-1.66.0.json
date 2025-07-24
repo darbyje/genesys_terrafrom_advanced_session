@@ -1,0 +1,795 @@
+{
+  "version": "1.66.0",
+  "resources": [
+    {
+      "name": "Architect Datatable",
+      "type": "genesyscloud_architect_datatable",
+      "dependencies": [
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Architect Datatable Row",
+      "type": "genesyscloud_architect_datatable_row",
+      "dependencies": [
+        "genesyscloud_architect_datatable"
+      ]
+    },
+    {
+      "name": "Architect Emergencygroup",
+      "type": "genesyscloud_architect_emergencygroup",
+      "dependencies": [
+        "genesyscloud_architect_ivr",
+        "genesyscloud_auth_division",
+        "genesyscloud_flow"
+      ]
+    },
+    {
+      "name": "Architect Grammar",
+      "type": "genesyscloud_architect_grammar"
+    },
+    {
+      "name": "Architect Grammar Language",
+      "type": "genesyscloud_architect_grammar_language",
+      "dependencies": [
+        "genesyscloud_architect_grammar"
+      ]
+    },
+    {
+      "name": "Architect Ivr",
+      "type": "genesyscloud_architect_ivr",
+      "dependencies": [
+        "genesyscloud_architect_schedulegroups",
+        "genesyscloud_auth_division",
+        "genesyscloud_flow"
+      ]
+    },
+    {
+      "name": "Architect Schedulegroups",
+      "type": "genesyscloud_architect_schedulegroups",
+      "dependencies": [
+        "genesyscloud_architect_schedules",
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Architect Schedules",
+      "type": "genesyscloud_architect_schedules",
+      "dependencies": [
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Architect User Prompt",
+      "type": "genesyscloud_architect_user_prompt"
+    },
+    {
+      "name": "Auth Division",
+      "type": "genesyscloud_auth_division"
+    },
+    {
+      "name": "Auth Role",
+      "type": "genesyscloud_auth_role",
+      "dependencies": [
+        "genesyscloud_routing_queue",
+        "genesyscloud_user"
+      ]
+    },
+    {
+      "name": "Conversations Messaging Integrations Instagram",
+      "type": "genesyscloud_conversations_messaging_integrations_instagram",
+      "dependencies": [
+        "genesyscloud_conversations_messaging_settings",
+        "genesyscloud_conversations_messaging_supportedcontent"
+      ]
+    },
+    {
+      "name": "Conversations Messaging Integrations Open",
+      "type": "genesyscloud_conversations_messaging_integrations_open",
+      "dependencies": [
+        "genesyscloud_conversations_messaging_settings",
+        "genesyscloud_conversations_messaging_supportedcontent"
+      ]
+    },
+    {
+      "name": "Conversations Messaging Integrations Whatsapp",
+      "type": "genesyscloud_conversations_messaging_integrations_whatsapp",
+      "dependencies": [
+        "genesyscloud_conversations_messaging_settings",
+        "genesyscloud_conversations_messaging_supportedcontent"
+      ]
+    },
+    {
+      "name": "Conversations Messaging Settings",
+      "type": "genesyscloud_conversations_messaging_settings"
+    },
+    {
+      "name": "Conversations Messaging Supportedcontent",
+      "type": "genesyscloud_conversations_messaging_supportedcontent"
+    },
+    {
+      "name": "Conversations Messaging Supportedcontent Default",
+      "type": "genesyscloud_conversations_messaging_supportedcontent_default",
+      "dependencies": [
+        "genesyscloud_conversations_messaging_supportedcontent"
+      ]
+    },
+    {
+      "name": "Employeeperformance Externalmetrics Definitions",
+      "type": "genesyscloud_employeeperformance_externalmetrics_definitions"
+    },
+    {
+      "name": "Externalcontacts Contact",
+      "type": "genesyscloud_externalcontacts_contact",
+      "dependencies": [
+        "genesyscloud_externalcontacts_organization"
+      ]
+    },
+    {
+      "name": "Externalcontacts External Source",
+      "type": "genesyscloud_externalcontacts_external_source"
+    },
+    {
+      "name": "Externalcontacts Organization",
+      "type": "genesyscloud_externalcontacts_organization"
+    },
+    {
+      "name": "Externalusers Identity",
+      "type": "genesyscloud_externalusers_identity",
+      "dependencies": [
+        "genesyscloud_user"
+      ]
+    },
+    {
+      "name": "Flow",
+      "type": "genesyscloud_flow"
+    },
+    {
+      "name": "Flow Loglevel",
+      "type": "genesyscloud_flow_loglevel"
+    },
+    {
+      "name": "Flow Milestone",
+      "type": "genesyscloud_flow_milestone",
+      "dependencies": [
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Flow Outcome",
+      "type": "genesyscloud_flow_outcome",
+      "dependencies": [
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Group",
+      "type": "genesyscloud_group",
+      "dependencies": [
+        "genesyscloud_user"
+      ]
+    },
+    {
+      "name": "Group Roles",
+      "type": "genesyscloud_group_roles",
+      "dependencies": [
+        "genesyscloud_auth_division",
+        "genesyscloud_auth_role",
+        "genesyscloud_group"
+      ]
+    },
+    {
+      "name": "Guide",
+      "type": "genesyscloud_guide"
+    },
+    {
+      "name": "Idp Adfs",
+      "type": "genesyscloud_idp_adfs"
+    },
+    {
+      "name": "Idp Generic",
+      "type": "genesyscloud_idp_generic"
+    },
+    {
+      "name": "Idp Gsuite",
+      "type": "genesyscloud_idp_gsuite"
+    },
+    {
+      "name": "Idp Okta",
+      "type": "genesyscloud_idp_okta"
+    },
+    {
+      "name": "Idp Onelogin",
+      "type": "genesyscloud_idp_onelogin"
+    },
+    {
+      "name": "Idp Ping",
+      "type": "genesyscloud_idp_ping"
+    },
+    {
+      "name": "Idp Salesforce",
+      "type": "genesyscloud_idp_salesforce"
+    },
+    {
+      "name": "Integration",
+      "type": "genesyscloud_integration",
+      "dependencies": [
+        "genesyscloud_integration_credential"
+      ]
+    },
+    {
+      "name": "Integration Action",
+      "type": "genesyscloud_integration_action",
+      "dependencies": [
+        "genesyscloud_integration"
+      ]
+    },
+    {
+      "name": "Integration Action Draft",
+      "type": "genesyscloud_integration_action_draft",
+      "dependencies": [
+        "genesyscloud_integration"
+      ]
+    },
+    {
+      "name": "Integration Credential",
+      "type": "genesyscloud_integration_credential"
+    },
+    {
+      "name": "Integration Custom Auth Action",
+      "type": "genesyscloud_integration_custom_auth_action",
+      "dependencies": [
+        "genesyscloud_integration"
+      ]
+    },
+    {
+      "name": "Integration Facebook",
+      "type": "genesyscloud_integration_facebook",
+      "dependencies": [
+        "genesyscloud_conversations_messaging_settings",
+        "genesyscloud_conversations_messaging_supportedcontent"
+      ]
+    },
+    {
+      "name": "Journey Action Map",
+      "type": "genesyscloud_journey_action_map",
+      "dependencies": [
+        "genesyscloud_architect_schedulegroups",
+        "genesyscloud_flow",
+        "genesyscloud_journey_action_template",
+        "genesyscloud_journey_outcome",
+        "genesyscloud_journey_segment"
+      ]
+    },
+    {
+      "name": "Journey Action Template",
+      "type": "genesyscloud_journey_action_template"
+    },
+    {
+      "name": "Journey Outcome",
+      "type": "genesyscloud_journey_outcome"
+    },
+    {
+      "name": "Journey Outcome Predictor",
+      "type": "genesyscloud_journey_outcome_predictor",
+      "dependencies": [
+        "genesyscloud_journey_outcome"
+      ]
+    },
+    {
+      "name": "Journey Segment",
+      "type": "genesyscloud_journey_segment"
+    },
+    {
+      "name": "Journey View Schedule",
+      "type": "genesyscloud_journey_view_schedule"
+    },
+    {
+      "name": "Journey Views",
+      "type": "genesyscloud_journey_views"
+    },
+    {
+      "name": "Knowledge Category",
+      "type": "genesyscloud_knowledge_category",
+      "dependencies": [
+        "genesyscloud_knowledge_knowledgebase"
+      ]
+    },
+    {
+      "name": "Knowledge Document",
+      "type": "genesyscloud_knowledge_document",
+      "dependencies": [
+        "genesyscloud_knowledge_knowledgebase"
+      ]
+    },
+    {
+      "name": "Knowledge Document Variation",
+      "type": "genesyscloud_knowledge_document_variation",
+      "dependencies": [
+        "genesyscloud_knowledge_document",
+        "genesyscloud_knowledge_knowledgebase"
+      ]
+    },
+    {
+      "name": "Knowledge Knowledgebase",
+      "type": "genesyscloud_knowledge_knowledgebase"
+    },
+    {
+      "name": "Knowledge Label",
+      "type": "genesyscloud_knowledge_label",
+      "dependencies": [
+        "genesyscloud_knowledge_knowledgebase"
+      ]
+    },
+    {
+      "name": "Location",
+      "type": "genesyscloud_location"
+    },
+    {
+      "name": "Oauth Client",
+      "type": "genesyscloud_oauth_client",
+      "dependencies": [
+        "genesyscloud_auth_division",
+        "genesyscloud_auth_role",
+        "genesyscloud_integration_credential"
+      ]
+    },
+    {
+      "name": "Organization Authentication Settings",
+      "type": "genesyscloud_organization_authentication_settings"
+    },
+    {
+      "name": "Organization Presence Definition",
+      "type": "genesyscloud_organization_presence_definition",
+      "dependencies": [
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Outbound Attempt Limit",
+      "type": "genesyscloud_outbound_attempt_limit"
+    },
+    {
+      "name": "Outbound Callabletimeset",
+      "type": "genesyscloud_outbound_callabletimeset"
+    },
+    {
+      "name": "Outbound Callanalysisresponseset",
+      "type": "genesyscloud_outbound_callanalysisresponseset",
+      "dependencies": [
+        "genesyscloud_flow"
+      ]
+    },
+    {
+      "name": "Outbound Campaign",
+      "type": "genesyscloud_outbound_campaign",
+      "dependencies": [
+        "genesyscloud_auth_division",
+        "genesyscloud_outbound_callabletimeset",
+        "genesyscloud_outbound_callanalysisresponseset",
+        "genesyscloud_outbound_contact_list",
+        "genesyscloud_outbound_contactlistfilter",
+        "genesyscloud_outbound_dnclist",
+        "genesyscloud_outbound_ruleset",
+        "genesyscloud_routing_queue",
+        "genesyscloud_script",
+        "genesyscloud_telephony_providers_edges_edge_group",
+        "genesyscloud_telephony_providers_edges_site"
+      ]
+    },
+    {
+      "name": "Outbound Campaignrule",
+      "type": "genesyscloud_outbound_campaignrule",
+      "dependencies": [
+        "genesyscloud_outbound_campaign",
+        "genesyscloud_outbound_sequence"
+      ]
+    },
+    {
+      "name": "Outbound Contact List",
+      "type": "genesyscloud_outbound_contact_list",
+      "dependencies": [
+        "genesyscloud_auth_division",
+        "genesyscloud_outbound_attempt_limit"
+      ]
+    },
+    {
+      "name": "Outbound Contact List Template",
+      "type": "genesyscloud_outbound_contact_list_template",
+      "dependencies": [
+        "genesyscloud_auth_division",
+        "genesyscloud_outbound_attempt_limit"
+      ]
+    },
+    {
+      "name": "Outbound Contactlistfilter",
+      "type": "genesyscloud_outbound_contactlistfilter",
+      "dependencies": [
+        "genesyscloud_outbound_contact_list",
+        "genesyscloud_outbound_contact_list_template"
+      ]
+    },
+    {
+      "name": "Outbound Digitalruleset",
+      "type": "genesyscloud_outbound_digitalruleset",
+      "dependencies": [
+        "genesyscloud_outbound_contact_list"
+      ]
+    },
+    {
+      "name": "Outbound Dnclist",
+      "type": "genesyscloud_outbound_dnclist",
+      "dependencies": [
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Outbound Filespecificationtemplate",
+      "type": "genesyscloud_outbound_filespecificationtemplate"
+    },
+    {
+      "name": "Outbound Messagingcampaign",
+      "type": "genesyscloud_outbound_messagingcampaign",
+      "dependencies": [
+        "genesyscloud_auth_division",
+        "genesyscloud_outbound_callabletimeset",
+        "genesyscloud_outbound_contact_list",
+        "genesyscloud_outbound_contactlistfilter",
+        "genesyscloud_outbound_digitalruleset",
+        "genesyscloud_outbound_dnclist",
+        "genesyscloud_responsemanagement_response",
+        "genesyscloud_routing_email_domain",
+        "genesyscloud_routing_email_route"
+      ]
+    },
+    {
+      "name": "Outbound Ruleset",
+      "type": "genesyscloud_outbound_ruleset",
+      "dependencies": [
+        "genesyscloud_integration_action",
+        "genesyscloud_outbound_contact_list",
+        "genesyscloud_routing_queue",
+        "genesyscloud_routing_wrapupcode"
+      ]
+    },
+    {
+      "name": "Outbound Sequence",
+      "type": "genesyscloud_outbound_sequence",
+      "dependencies": [
+        "genesyscloud_outbound_campaign"
+      ]
+    },
+    {
+      "name": "Outbound Settings",
+      "type": "genesyscloud_outbound_settings"
+    },
+    {
+      "name": "Outbound Wrapupcodemappings",
+      "type": "genesyscloud_outbound_wrapupcodemappings",
+      "dependencies": [
+        "genesyscloud_routing_wrapupcode"
+      ]
+    },
+    {
+      "name": "Processautomation Trigger",
+      "type": "genesyscloud_processautomation_trigger",
+      "dependencies": [
+        "genesyscloud_flow"
+      ]
+    },
+    {
+      "name": "Quality Forms Evaluation",
+      "type": "genesyscloud_quality_forms_evaluation"
+    },
+    {
+      "name": "Quality Forms Survey",
+      "type": "genesyscloud_quality_forms_survey"
+    },
+    {
+      "name": "Recording Media Retention Policy",
+      "type": "genesyscloud_recording_media_retention_policy",
+      "dependencies": [
+        "genesyscloud_flow",
+        "genesyscloud_integration",
+        "genesyscloud_quality_forms_evaluation",
+        "genesyscloud_routing_language",
+        "genesyscloud_routing_queue",
+        "genesyscloud_routing_wrapupcode",
+        "genesyscloud_team",
+        "genesyscloud_user"
+      ]
+    },
+    {
+      "name": "Responsemanagement Library",
+      "type": "genesyscloud_responsemanagement_library"
+    },
+    {
+      "name": "Responsemanagement Response",
+      "type": "genesyscloud_responsemanagement_response",
+      "dependencies": [
+        "genesyscloud_responsemanagement_library",
+        "responsemanagement_responseasset"
+      ]
+    },
+    {
+      "name": "Responsemanagement Responseasset",
+      "type": "genesyscloud_responsemanagement_responseasset",
+      "dependencies": [
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Routing Email Domain",
+      "type": "genesyscloud_routing_email_domain"
+    },
+    {
+      "name": "Routing Email Route",
+      "type": "genesyscloud_routing_email_route",
+      "dependencies": [
+        "genesyscloud_flow",
+        "genesyscloud_routing_email_domain",
+        "genesyscloud_routing_language",
+        "genesyscloud_routing_queue",
+        "genesyscloud_routing_skill"
+      ]
+    },
+    {
+      "name": "Routing Language",
+      "type": "genesyscloud_routing_language"
+    },
+    {
+      "name": "Routing Queue",
+      "type": "genesyscloud_routing_queue",
+      "dependencies": [
+        "genesyscloud_architect_user_prompt",
+        "genesyscloud_auth_division",
+        "genesyscloud_flow",
+        "genesyscloud_group",
+        "genesyscloud_responsemanagement_library",
+        "genesyscloud_routing_email_domain",
+        "genesyscloud_routing_email_route",
+        "genesyscloud_routing_skill",
+        "genesyscloud_routing_skill_group",
+        "genesyscloud_routing_wrapupcode",
+        "genesyscloud_script",
+        "genesyscloud_team",
+        "genesyscloud_user"
+      ]
+    },
+    {
+      "name": "Routing Queue Conditional Group Routing",
+      "type": "genesyscloud_routing_queue_conditional_group_routing",
+      "dependencies": [
+        "genesyscloud_routing_queue"
+      ]
+    },
+    {
+      "name": "Routing Queue Outbound Email Address",
+      "type": "genesyscloud_routing_queue_outbound_email_address",
+      "dependencies": [
+        "genesyscloud_routing_email_domain",
+        "genesyscloud_routing_email_route",
+        "genesyscloud_routing_queue"
+      ]
+    },
+    {
+      "name": "Routing Settings",
+      "type": "genesyscloud_routing_settings"
+    },
+    {
+      "name": "Routing Skill",
+      "type": "genesyscloud_routing_skill"
+    },
+    {
+      "name": "Routing Skill Group",
+      "type": "genesyscloud_routing_skill_group",
+      "dependencies": [
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Routing Sms Address",
+      "type": "genesyscloud_routing_sms_address"
+    },
+    {
+      "name": "Routing Utilization",
+      "type": "genesyscloud_routing_utilization"
+    },
+    {
+      "name": "Routing Utilization Label",
+      "type": "genesyscloud_routing_utilization_label"
+    },
+    {
+      "name": "Routing Wrapupcode",
+      "type": "genesyscloud_routing_wrapupcode",
+      "dependencies": [
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Script",
+      "type": "genesyscloud_script",
+      "dependencies": [
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Task Management Workbin",
+      "type": "genesyscloud_task_management_workbin",
+      "dependencies": [
+        "genesyscloud_auth_division"
+      ]
+    },
+    {
+      "name": "Task Management Workitem",
+      "type": "genesyscloud_task_management_workitem",
+      "dependencies": [
+        "genesyscloud_externalcontacts_contact",
+        "genesyscloud_routing_language",
+        "genesyscloud_routing_queue",
+        "genesyscloud_routing_skill",
+        "genesyscloud_task_management_workbin",
+        "genesyscloud_task_management_worktype",
+        "genesyscloud_task_management_worktype_status",
+        "genesyscloud_user"
+      ]
+    },
+    {
+      "name": "Task Management Workitem Schema",
+      "type": "genesyscloud_task_management_workitem_schema"
+    },
+    {
+      "name": "Task Management Worktype",
+      "type": "genesyscloud_task_management_worktype",
+      "dependencies": [
+        "genesyscloud_auth_division",
+        "genesyscloud_routing_language",
+        "genesyscloud_routing_queue",
+        "genesyscloud_routing_skill",
+        "genesyscloud_script",
+        "genesyscloud_task_management_workbin",
+        "genesyscloud_task_management_workitem_schema"
+      ]
+    },
+    {
+      "name": "Task Management Worktype Flow Datebased Rule",
+      "type": "genesyscloud_task_management_worktype_flow_datebased_rule",
+      "dependencies": [
+        "genesyscloud_task_management_worktype"
+      ]
+    },
+    {
+      "name": "Task Management Worktype Flow Onattributechange Rule",
+      "type": "genesyscloud_task_management_worktype_flow_onattributechange_rule",
+      "dependencies": [
+        "genesyscloud_task_management_worktype",
+        "genesyscloud_task_management_worktype_status"
+      ]
+    },
+    {
+      "name": "Task Management Worktype Flow Oncreate Rule",
+      "type": "genesyscloud_task_management_worktype_flow_oncreate_rule",
+      "dependencies": [
+        "genesyscloud_task_management_worktype"
+      ]
+    },
+    {
+      "name": "Task Management Worktype Status",
+      "type": "genesyscloud_task_management_worktype_status",
+      "dependencies": [
+        "genesyscloud_task_management_worktype"
+      ]
+    },
+    {
+      "name": "Task Management Worktype Status Transition",
+      "type": "genesyscloud_task_management_worktype_status_transition",
+      "dependencies": [
+        "genesyscloud_task_management_worktype",
+        "genesyscloud_task_management_worktype_status"
+      ]
+    },
+    {
+      "name": "Team",
+      "type": "genesyscloud_team",
+      "dependencies": [
+        "genesyscloud_auth_division",
+        "genesyscloud_user"
+      ]
+    },
+    {
+      "name": "Telephony Providers Edges Did Pool",
+      "type": "genesyscloud_telephony_providers_edges_did_pool"
+    },
+    {
+      "name": "Telephony Providers Edges Edge Group",
+      "type": "genesyscloud_telephony_providers_edges_edge_group",
+      "dependencies": [
+        "genesyscloud_telephony_providers_edges_trunkbasesettings"
+      ]
+    },
+    {
+      "name": "Telephony Providers Edges Extension Pool",
+      "type": "genesyscloud_telephony_providers_edges_extension_pool"
+    },
+    {
+      "name": "Telephony Providers Edges Phone",
+      "type": "genesyscloud_telephony_providers_edges_phone",
+      "dependencies": [
+        "genesyscloud_telephony_providers_edges_phonebasesettings",
+        "genesyscloud_telephony_providers_edges_site",
+        "genesyscloud_user"
+      ]
+    },
+    {
+      "name": "Telephony Providers Edges Phonebasesettings",
+      "type": "genesyscloud_telephony_providers_edges_phonebasesettings"
+    },
+    {
+      "name": "Telephony Providers Edges Site",
+      "type": "genesyscloud_telephony_providers_edges_site",
+      "dependencies": [
+        "genesyscloud_location"
+      ]
+    },
+    {
+      "name": "Telephony Providers Edges Site Outbound Route",
+      "type": "genesyscloud_telephony_providers_edges_site_outbound_route",
+      "dependencies": [
+        "genesyscloud_telephony_providers_edges_site",
+        "genesyscloud_telephony_providers_edges_trunkbasesettings"
+      ]
+    },
+    {
+      "name": "Telephony Providers Edges Trunk",
+      "type": "genesyscloud_telephony_providers_edges_trunk",
+      "dependencies": [
+        "genesyscloud_telephony_providers_edges_edge_group",
+        "genesyscloud_telephony_providers_edges_trunkbasesettings"
+      ]
+    },
+    {
+      "name": "Telephony Providers Edges Trunkbasesettings",
+      "type": "genesyscloud_telephony_providers_edges_trunkbasesettings",
+      "dependencies": [
+        "genesyscloud_telephony_providers_edges_site"
+      ]
+    },
+    {
+      "name": "User",
+      "type": "genesyscloud_user",
+      "dependencies": [
+        "genesyscloud_auth_division",
+        "genesyscloud_location",
+        "genesyscloud_routing_language",
+        "genesyscloud_routing_skill",
+        "genesyscloud_telephony_providers_edges_extension_pool"
+      ]
+    },
+    {
+      "name": "User Roles",
+      "type": "genesyscloud_user_roles",
+      "dependencies": [
+        "genesyscloud_auth_division",
+        "genesyscloud_auth_role",
+        "genesyscloud_user"
+      ]
+    },
+    {
+      "name": "Webdeployments Configuration",
+      "type": "genesyscloud_webdeployments_configuration",
+      "dependencies": [
+        "genesyscloud_integration",
+        "genesyscloud_knowledge_category",
+        "genesyscloud_knowledge_knowledgebase"
+      ]
+    },
+    {
+      "name": "Webdeployments Deployment",
+      "type": "genesyscloud_webdeployments_deployment",
+      "dependencies": [
+        "genesyscloud_flow",
+        "genesyscloud_webdeployments_configuration"
+      ]
+    }
+  ]
+}
