@@ -40,6 +40,18 @@ jobs:
       run: terraform fmt -check -recursive
       continue-on-error: true
 
+    - name: Debug Environment Variables
+      run: |
+        echo "Checking environment variables..."
+        echo "TF_VAR_oauthclient_id is set: ${{ secrets.DEV_OAUTHCLIENT_ID != '' }}"
+        echo "TF_VAR_oauthclient_secret is set: ${{ secrets.DEV_OAUTHCLIENT_SECRET != '' }}"
+        echo "OAuth Client ID length: ${#TF_VAR_oauthclient_id}"
+        echo "OAuth Client Secret length: ${#TF_VAR_oauthclient_secret}"
+      env:
+        TF_VAR_oauthclient_id: ${{ secrets.DEV_OAUTHCLIENT_ID }}
+        TF_VAR_oauthclient_secret: ${{ secrets.DEV_OAUTHCLIENT_SECRET }}
+        TF_VAR_aws_region: "ap-southeast-2"
+
     - name: Terraform Init
       run: terraform init -backend-config=backend-dev.conf
       env:
