@@ -7,9 +7,10 @@ variable "oauthclient_secret" {
   type    = string
   default = ""
 }
+
 variable "aws_region" {
   type    = string
-  default = ""
+  default = "ap-southeast-2"
 }
 
 

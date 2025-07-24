@@ -43,7 +43,7 @@ jobs:
       env:
         TF_VAR_oauthclient_id: ${{ secrets.PROD_OAUTHCLIENT_ID }}
         TF_VAR_oauthclient_secret: ${{ secrets.PROD_OAUTHCLIENT_SECRET }}
-        TF_VAR_aws_region: ${{ env.AWS_REGION }}
+        TF_VAR_aws_region: "ap-southeast-2"
 
     - name: Terraform Validate
       run: terraform validate
@@ -54,7 +54,7 @@ jobs:
       env:
         TF_VAR_oauthclient_id: ${{ secrets.PROD_OAUTHCLIENT_ID }}
         TF_VAR_oauthclient_secret: ${{ secrets.PROD_OAUTHCLIENT_SECRET }}
-        TF_VAR_aws_region: ${{ env.AWS_REGION }}
+        TF_VAR_aws_region: "ap-southeast-2"
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
@@ -122,11 +122,11 @@ jobs:
       env:
         TF_VAR_oauthclient_id: ${{ secrets.PROD_OAUTHCLIENT_ID }}
         TF_VAR_oauthclient_secret: ${{ secrets.PROD_OAUTHCLIENT_SECRET }}
-        TF_VAR_aws_region: ${{ env.AWS_REGION }}
+        TF_VAR_aws_region: "ap-southeast-2"
 
     - name: Terraform Apply
       run: terraform apply tfplan
       env:
         TF_VAR_oauthclient_id: ${{ secrets.PROD_OAUTHCLIENT_ID }}
         TF_VAR_oauthclient_secret: ${{ secrets.PROD_OAUTHCLIENT_SECRET }}
-        TF_VAR_aws_region: ${{ env.AWS_REGION }} 
+        TF_VAR_aws_region: "ap-southeast-2" 

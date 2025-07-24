@@ -45,7 +45,7 @@ jobs:
       env:
         TF_VAR_oauthclient_id: ${{ secrets.DEV_OAUTHCLIENT_ID }}
         TF_VAR_oauthclient_secret: ${{ secrets.DEV_OAUTHCLIENT_SECRET }}
-        TF_VAR_aws_region: ${{ env.AWS_REGION }}
+        TF_VAR_aws_region: "ap-southeast-2"
 
     - name: Terraform Validate
       run: terraform validate
@@ -56,7 +56,7 @@ jobs:
       env:
         TF_VAR_oauthclient_id: ${{ secrets.DEV_OAUTHCLIENT_ID }}
         TF_VAR_oauthclient_secret: ${{ secrets.DEV_OAUTHCLIENT_SECRET }}
-        TF_VAR_aws_region: ${{ env.AWS_REGION }}
+        TF_VAR_aws_region: "ap-southeast-2"
       continue-on-error: true
 
     - name: Update Pull Request
@@ -85,4 +85,4 @@ jobs:
       env:
         TF_VAR_oauthclient_id: ${{ secrets.DEV_OAUTHCLIENT_ID }}
         TF_VAR_oauthclient_secret: ${{ secrets.DEV_OAUTHCLIENT_SECRET }}
-        TF_VAR_aws_region: ${{ env.AWS_REGION }} 
+        TF_VAR_aws_region: "ap-southeast-2" 
