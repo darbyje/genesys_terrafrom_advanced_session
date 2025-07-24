@@ -40,19 +40,8 @@ jobs:
       run: terraform fmt -check -recursive
       continue-on-error: true
 
-    - name: Switch Backend Configuration
-      run: |
-        echo "Switching to dev backend configuration..."
-        # Remove any existing backend.tf files to avoid conflicts
-        rm -f backend.tf
-        rm -f backend-original.tf
-        # Copy dev backend configuration
-        cp backend-dev.tf backend.tf
-        echo "✅ Backend configuration switched to dev environment"
-        echo "State file: dev/org/genesyspsapac/terraform.tfstate"
-
     - name: Terraform Init
-      run: terraform init
+      run: terraform init -backend-config=backend-dev.conf
       env:
         TF_VAR_oauthclient_id: ${{ secrets.DEV_OAUTHCLIENT_ID }}
         TF_VAR_oauthclient_secret: ${{ secrets.DEV_OAUTHCLIENT_SECRET }}

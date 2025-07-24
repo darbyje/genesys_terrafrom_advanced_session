@@ -32,18 +32,11 @@ for file in "${workflow_files[@]}"; do
             echo "✅ $file has been updated correctly"
         fi
         
-        # Check for the rm -f backend.tf command
-        if grep -q "rm -f backend.tf" "$file"; then
-            echo "✅ $file includes backend conflict fix"
+        # Check for the new backend-config approach
+        if grep -q "backend-config=" "$file"; then
+            echo "✅ $file uses new backend-config approach"
         else
-            echo "❌ $file missing backend conflict fix"
-        fi
-        
-        # Check for the rm -f backend-original.tf command
-        if grep -q "rm -f backend-original.tf" "$file"; then
-            echo "✅ $file includes backend-original cleanup"
-        else
-            echo "❌ $file missing backend-original cleanup"
+            echo "❌ $file missing backend-config approach"
         fi
     else
         echo "❌ $file missing"
@@ -54,8 +47,9 @@ echo ""
 echo "🔧 Checking backend configuration files..."
 
 backend_files=(
-    "backend-dev.tf"
-    "backend-prod.tf"
+    "backend.tf"
+    "backend-dev.conf"
+    "backend-prod.conf"
     "backend-original.tf.backup"
 )
 
@@ -68,16 +62,16 @@ for file in "${backend_files[@]}"; do
 done
 
 # Check that problematic files are gone
-if [ -f "backend.tf" ]; then
-    echo "❌ backend.tf still exists (should be removed)"
+if [ -f "backend-dev.tf" ]; then
+    echo "❌ backend-dev.tf still exists (should be removed)"
 else
-    echo "✅ backend.tf removed (conflict resolved)"
+    echo "✅ backend-dev.tf removed (conflict resolved)"
 fi
 
-if [ -f "backend-original.tf" ]; then
-    echo "❌ backend-original.tf still exists (should be renamed)"
+if [ -f "backend-prod.tf" ]; then
+    echo "❌ backend-prod.tf still exists (should be removed)"
 else
-    echo "✅ backend-original.tf renamed to .backup (conflict resolved)"
+    echo "✅ backend-prod.tf removed (conflict resolved)"
 fi
 
 echo ""
@@ -89,4 +83,9 @@ echo "1. Commit these workflow changes"
 echo "2. Push to dev branch to test the workflow"
 echo "3. Check GitHub Actions to see if the backend conflict is resolved"
 echo ""
-echo "✅ The 'Duplicate backend configuration' error should now be fixed!" 
+echo "✅ The 'Duplicate backend configuration' error should now be fixed!"
+echo ""
+echo "🔧 New approach:"
+echo "   - Single backend.tf with partial configuration"
+echo "   - Environment-specific .conf files"
+echo "   - terraform init -backend-config=backend-dev.conf" 
