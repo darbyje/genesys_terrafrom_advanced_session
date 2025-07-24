@@ -21,6 +21,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
@@ -68,10 +70,30 @@ jobs:
         TF_VAR_oauthclient_secret: ${{ secrets.PROD_OAUTHCLIENT_SECRET }}
         TF_VAR_aws_region: "ap-southeast-2"
 
+    - name: Check for Changes
+      id: changes
+      run: |
+        if terraform show tfplan | grep -q "No changes"; then
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+          echo "No changes detected - skipping PR creation"
+        else
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+          echo "Changes detected - will create PR"
+        fi
+
+    - name: Clean up existing deployment branch
+      if: steps.changes.outputs.has_changes == 'true'
+      run: |
+        # Delete local branch if it exists
+        git branch -D prod-deployment 2>/dev/null || true
+        # Delete remote branch if it exists
+        git push origin --delete prod-deployment 2>/dev/null || true
+
     - name: Create Pull Request
+      if: steps.changes.outputs.has_changes == 'true'
       uses: peter-evans/create-pull-request@v5
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PAT_TOKEN }}
         commit-message: 'Terraform Plan for Production'
         title: '🚀 Production Deployment - Terraform Changes'
         body: |
@@ -104,10 +126,33 @@ jobs:
           deployment
         assignees: ${{ github.actor }}
 
+    - name: Comment on Commit (No Changes)
+      if: steps.changes.outputs.has_changes == 'false'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const output = `#### No Changes Detected 📋
+          
+          Terraform plan shows no changes are needed for production.
+          
+          **No PR created** - infrastructure is already up to date.
+          
+          *Commit: ${context.sha}*
+          *Pusher: @${context.actor}*
+          `;
+          
+          github.rest.repos.createCommitComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            commit_sha: context.sha,
+            body: output
+          })
+
   terraform-apply:
     name: 'Terraform Apply'
     runs-on: ubuntu-latest
     needs: terraform-plan
+    if: needs.terraform-plan.outputs.has_changes == 'true'
     
     defaults:
       run:
