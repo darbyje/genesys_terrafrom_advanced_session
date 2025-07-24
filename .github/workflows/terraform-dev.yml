@@ -53,7 +53,7 @@ jobs:
         TF_VAR_aws_region: "ap-southeast-2"
 
     - name: Terraform Init
-      run: terraform init -backend-config=backend-dev.conf
+      run: terraform init -backend-config=backend-dev.conf -reconfigure
       env:
         TF_VAR_oauthclient_id: ${{ secrets.DEV_OAUTHCLIENT_ID }}
         TF_VAR_oauthclient_secret: ${{ secrets.DEV_OAUTHCLIENT_SECRET }}

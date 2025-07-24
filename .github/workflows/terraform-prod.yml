@@ -53,7 +53,7 @@ jobs:
         TF_VAR_aws_region: "ap-southeast-2"
 
     - name: Terraform Init
-      run: terraform init -backend-config=backend-prod.conf
+      run: terraform init -backend-config=backend-prod.conf -reconfigure
       env:
         TF_VAR_oauthclient_id: ${{ secrets.PROD_OAUTHCLIENT_ID }}
         TF_VAR_oauthclient_secret: ${{ secrets.PROD_OAUTHCLIENT_SECRET }}
@@ -175,7 +175,7 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Terraform Init
-      run: terraform init -backend-config=backend-prod.conf
+      run: terraform init -backend-config=backend-prod.conf -reconfigure
       env:
         TF_VAR_oauthclient_id: ${{ secrets.PROD_OAUTHCLIENT_ID }}
         TF_VAR_oauthclient_secret: ${{ secrets.PROD_OAUTHCLIENT_SECRET }}
