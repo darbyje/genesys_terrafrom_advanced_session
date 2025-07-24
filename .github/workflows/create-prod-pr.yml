@@ -19,7 +19,7 @@ jobs:
 
       - name: Create PR from dev to prod if not exists
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           if gh pr list --base prod --head dev --state open | grep -q .; then
             echo "PR from dev to prod already exists."
