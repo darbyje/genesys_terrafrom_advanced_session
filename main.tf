@@ -43,7 +43,7 @@ module "architect_ivr" {
 module "architect_schedulegroups" {
   source           = "./modules/architect_schedulegroups"
   schedules_id_map = module.architect_schedules.schedules
-  depends_on       = [module.auth_division]
+  depends_on       = [module.auth_division, module.architect_schedules]
 }
 
 #Architect schedules must begin on the actual day. EG: If rrule says repeat every Saturday from 23 Sept, but 23 sept is a monday, schedule creation will fail in terraform.
