@@ -1,3 +1,3 @@
 name,description,division,time_zone,open_schedules,closed_schedules,holiday_schedules
-Terraform_SG,,Home,Pacific/Auckland,BH_M-F_0700-1700,,"PH_New Years Day_2, PH_Day after New Years Day_2, PH_Waitangi Day_2, PH_Good Friday_2, PH_Easter Monday_2, PH_Anzac Day_2, PH_Kings Official Birthday_2, PH_Matariki_2, PH_Labor Day_2, PH_Christmas_2, PH_Boxing Day_2"
-Terraform_SG_2,,Terraform Division,Pacific/Auckland,BH_M-F_0700-1700,,
+Terraform_SG,,Home,Pacific/Auckland,BH_M-F_0700-1700_2,,"PH_New Years Day_2, PH_Day after New Years Day_2, PH_Waitangi Day_2, PH_Good Friday_2, PH_Easter Monday_2, PH_Anzac Day_2, PH_Kings Official Birthday_2, PH_Matariki_2, PH_Labor Day_2, PH_Christmas_2, PH_Boxing Day_2"
+Terraform_SG_2,,Terraform Division,Pacific/Auckland,BH_M-F_0700-1700_2,,
