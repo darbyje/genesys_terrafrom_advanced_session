@@ -22,6 +22,18 @@ You need to set up these secrets in your GitHub repository:
 | `AWS_ACCESS_KEY_ID` | AWS Access Key for S3 backend | `AKIAIOSFODNN7EXAMPLE` |
 | `AWS_SECRET_ACCESS_KEY` | AWS Secret Key for S3 backend | `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` |
 
+### **3. GitHub Personal Access Token**
+
+| Secret Name   | Description                                                      | Example Value                |
+|--------------|------------------------------------------------------------------|------------------------------|
+| `PAT_TOKEN`  | GitHub Personal Access Token for CI/CD or automation workflows.  | `ghp_XXXXXXXXXXXXXXXXXXXXXX` |
+
+**How to create:**  
+1. Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens).
+2. Click "Generate new token" (classic) or "Fine-grained token".
+3. Select the required scopes (usually `repo`, and `workflow` if your automation triggers workflows).
+4. Copy the token and add it as a secret named `PAT_TOKEN` in your repository’s GitHub Secrets.
+
 ## 🚀 How to Set Up Secrets
 
 ### **Step 1: Go to Repository Settings**
